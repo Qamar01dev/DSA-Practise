@@ -14,11 +14,11 @@ node * creatnode(int data)
     n->left = NULL;
     return n;
 }
-void preOrder(node * root){
+void inOrder(node * root){
     if(root!=NULL){
+        inOrder(root->left);
         cout<<root->data<<" ";
-        preOrder(root->left);
-        preOrder(root->right);
+        inOrder(root->right);
     }
 }
 int isBST(node *root){
@@ -38,6 +38,20 @@ int isBST(node *root){
         return 1;
     }
 }
+node* Search(node * root , int key){
+    if(root==NULL){
+        return NULL ;
+    }
+    if(key  == root->data){
+        return root;
+    }
+    else if(key < root->data){
+        return Search(root->left, key);
+    }
+    else{
+        return Search(root->right, key);
+    }
+}
 int main()
 {
     node *p = creatnode(3);
@@ -53,8 +67,12 @@ int main()
     cout <<"right node is "<<p->right->data<<endl;
     cout <<"root is "<<p->data<<endl;
     cout <<"left node is "<<p->left->data<<endl;
-    preOrder(p);
-
-    cout<<isBST(p);
+    node * n = Search(p , 3);
+    if(n!=NULL){
+        cout <<"element found at"<<n->data<<endl;
+    }
+    else{ 
+        cout<<"element not found"<<endl;
+    }
     return 0;
 }
