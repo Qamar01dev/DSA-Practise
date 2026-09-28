@@ -38,41 +38,52 @@ int isBST(node *root){
         return 1;
     }
 }
-node* Iterative(node * root , int key){
-    while(root!=NULL){
-      if(key == root->data){
+node* InsertInbinary(node * root , int key){
+     node * prev = NULL;
+     node * curr = root;
+    while (curr!=NULL)
+    {
+        prev = curr;
+    if(key == curr->data){
         return root;
-      }
-      else if (key < root->data){
-        return root->left;
-      }
-      else{
-        return root ->right;
-      }
+    }
+    else if(key < curr ->data){
+        curr = curr->left;
+    }
+    else{
+        curr = curr->right;
+    }
 }
-return NULL;
+ node *new_node = creatnode(key);
+ if(prev == NULL){
+        return new_node;
+    }
+if(key< prev->data){
+    prev->left = new_node;
+}else{
+    prev->right = new_node;
 }
+return root;
+}
+
 int main()
 {
-    node *p = creatnode(3);
-    node *p1 = creatnode(4);
+    node *p = creatnode(5);
+    node *p1 = creatnode(3);
     node *p2 = creatnode(6);
-    node *p3 = creatnode(55);
-    node *p4 = creatnode(88);
+    
     p->left = p1;
     p->right = p2;
-    p->left = p3;
-    p->right =p4;
 
     cout <<"right node is "<<p->right->data<<endl;
     cout <<"root is "<<p->data<<endl;
     cout <<"left node is "<<p->left->data<<endl;
-    node * n = Iterative(p , 3);
-    if(n!=NULL){
-        cout <<"element found : "<<n->data<<endl;
-    }
-    else{ 
-        cout<<"element not found"<<endl;
-    }
-    return 0;
+    cout <<"now output "<<endl;
+    InsertInbinary(p, 7);
+
+    cout << "p->right->left data: " << p->right->right->data << endl;
+
+    cout << "InOrder Traversal: ";
+    inOrder(p);
+    cout << endl;
 }
