@@ -67,7 +67,7 @@ return root;
 }
 node * inOrderpredecessor(node * root){
     root = root ->left;
-    if (root->right != NULL){
+    while(root->right != NULL){
         root = root -> right;
     }
     return root;
@@ -77,7 +77,7 @@ node * DeletionNode(node *root , int value){
     if(root == NULL){
         return NULL;
     }
-    if(root->right && root->left ==NULL){
+    if(root->right == NULL  && root->left ==NULL){
         free(root);
         return NULL;
     }
